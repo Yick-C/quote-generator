@@ -35,8 +35,13 @@ body {
   font-size: 2rem;
 }
 
+i {
+  padding: 10px;
+}
+
+.fa-quote-right
 .fa-quote-left {
-  font-size: 4rem;
+  font-size: 2.5rem;
 }
 
 .quote-author {
@@ -74,6 +79,11 @@ button:active {
   box-shadow: 0 0.1rem rgba(255, 255, 255, 0.65);
 }
 
+.twitter-button {
+  display: flex;
+  align-items: center;
+}
+
 .twitter-button:hover {
   color: #38a1f3;
 }
@@ -90,6 +100,12 @@ button:active {
   width: 120px;
   height: 120px;
   animation: spin 2s linear infinite;
+}
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 @keyframes spin {

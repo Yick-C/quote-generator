@@ -4,24 +4,23 @@ const authorText = document.getElementById('author');
 const twitterBtn = document.getElementById('twitter');
 const newQuoteBtn = document.getElementById('new-quote');
 const loader = document.getElementById('loader');
+const loadingContainer = document.getElementById('loadingContainer');
 
 let apiQuotes = [];
 
-// Show Loading
-function loading() {
+function showLoadingSpinner() {
     loader.hidden = false;
     quoteContainer.hidden = true;
 }
 
-// Hide Loading
-function complete() {
+function removeLoadingSpinner() {
     quoteContainer.hidden = false;
     loader.hidden = true;
 }
 
 // Show new quote
 function newQuote() {
-    loading();
+    showLoadingSpinner();
     // Get random quote from quote api array
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
     
@@ -41,12 +40,12 @@ function newQuote() {
 
     // Set Quote, Hide Loader
     quoteText.textContent = quote.text;
-    complete();
+    removeLoadingSpinner();
 }
 
 // Get quotes from API
 async function getQuotes() {
-    loading();
+    showLoadingSpinner();
     const apiUrl = 'https://jacintodesign.github.io/quotes-api/data/quotes.json';
 
     try {
@@ -54,7 +53,12 @@ async function getQuotes() {
         apiQuotes = await response.json();
         newQuote();
     } catch (err) {
-        // Error message here
+        console.log(err);
+        // Display loading spinner and error message here
+        let p = document.createElement('p');
+        p.textContent = 'Sorry, there is an error. Please try again later.';
+        loadingContainer.append(p);
+        showLoadingSpinner();
     }
 }
 
